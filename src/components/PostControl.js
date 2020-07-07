@@ -4,7 +4,7 @@ import PostDetail from './PostDetail';
 import NewPostForm from './NewPostForm';
 import EditPostForm from './EditPostForm';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 
 
 class PostControl extends React.Component {
@@ -33,28 +33,32 @@ class PostControl extends React.Component {
 
   handleAddingNewPostToList = (newPost) => {
     const { dispatch } = this.props;
-    const { id, userName, message } = newPost;
+    const { id, userName, message, upVote, downVote } = newPost;
     const action = {
       type: 'ADD_POST',
       id: id,
       userName: userName,
       message: message,
+      upVote: 0,
+      downVote: 0
     }
     dispatch(action);
     this.setState({formVisibleOnPage: false});
   }
 
   handleChangingSelectedPost = (id) => {
-    const selectedPost = this.state.postList.filter(post => post.id === id)[0];
+    const selectedPost = this.props.postList[id];
     this.setState({selectedPost: selectedPost});
   }
 
   handleDeletingPost = (id) => {
-    const newPostList = this.state.postList.filter(post => post.id !== id);
-    this.setState({
-      postList: newPostList,
-      selectedPost: null
-    });
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DELETE_POST',
+      id: id
+    }
+    dispatch(action);
+    this.setState({selectedPost: null});
   }
 
   handleEditClick = () => {
@@ -62,29 +66,43 @@ class PostControl extends React.Component {
   }
 
   handleEditingPostInList = (postToEdit) => {
-    const editedPostList = this.state.postList
-                            .filter(post => post.id !== this.state.selectedPost.id)
-                            .concat(postToEdit);
+    const { dispatch } = this.props;
+    const { id, userName, message, upVote, downVote} = postToEdit;
+    const action = {
+      type: 'ADD_POST',
+      id: id,
+      userName: userName,
+      message: message,
+      upVote: upVote,
+      downVote: downVote,
+    }
+    dispatch(action);
     this.setState({
-      postList: editedPostList,
       editing: false,
       selectedPost: null
     });
   }
 
-  handleUpvotePost = (id) => {
-    const upvotedPost = this.state.postList.filter(post => post.id === id)[0];
-    upvotedPost.upVote += 1;
-    const editedPostList = this.state.postList
-                            .filter(post => post.id !== this.state.selectedPost.id)
-                            .concat(upvotedPost);
-    this.setState({
-      postList: editedPostList
-    });
+  handleUpvotePost = (id, upVote) => {
+    const { dispatch } = this.props;
+    const action = {
+      type: 'UPVOTE_POST',
+      id: id,
+      upVote: upVote += 1
+    }
+    dispatch(action);
+    this.setState({selectedPost: null})
+    // upvotedPost.upVote += 1;
+    // const editedPostList = this.state.postList
+    //                         .filter(post => post.id !== this.state.selectedPost.id)
+    //                         .concat(upvotedPost);
+    // this.setState({
+    //   postList: editedPostList
+    // });
   }
 
   handleDownvotePost = (id) => {
-    const downvotedPost = this.state.postList.filter(post => post.id === id)[0];
+    const downvotedPost = this.props.postList[id];
     downvotedPost.downVote -= 1;
     const editedPostList = this.state.postList
                             .filter(post => post.id !== this.state.selectedPost.id)
@@ -117,8 +135,8 @@ class PostControl extends React.Component {
       buttonText = 'Return to Post List';
     } else {
       currentlyVisibleState = <PostList
-                              postList = {this.state.postList}
-                              onPostSelection = {this.handleChanginSelectedPost} />
+                              postList = {this.props.postList}
+                              onPostSelection = {this.handleChangingSelectedPost} />
       buttonText = 'Add Post'
     }
     return(
@@ -130,5 +148,16 @@ class PostControl extends React.Component {
   }
 }
 
-PostControl = connect()(PostControl);
+PostControl.propTypes = {
+  postList: PropTypes.object
+}
+
+const mapStateToProps = state => {
+  return {
+    postList: state
+  }
+}
+
+PostControl = connect(mapStateToProps)(PostControl);
+
 export default PostControl;

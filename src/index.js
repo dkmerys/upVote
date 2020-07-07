@@ -6,10 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import reducer from './reducers/post-list-reducer';
 import { Provider } from 'react-redux';
+import initialState from './components/InitialState';
 
-const store = createStore(reducer);
+const store = createStore(reducer, initialState);
 store.subscribe(() =>
-  console.log(swaitForElementToBeRemoved.getState())
+  console.log(store.getState())
 );
 
 ReactDOM.render(
