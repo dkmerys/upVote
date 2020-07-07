@@ -13,6 +13,10 @@ class PostControl extends React.Component {
       editing: false,
       postList: [
         {
+          name: ,
+          message: ,
+          upVote:
+          downVote:
 
         }
       ]
@@ -81,9 +85,48 @@ class PostControl extends React.Component {
   handleDownvotePost = (id) => {
     const downvotedPost = this.state.postList.filter(post => post.id === id)[0];
     downvotedPost.downVote -= 1;
-    const editedPostList = this.state.postL
+    const editedPostList = this.state.postList
+                            .filter(post => post.id !== this.state.selectedPost.id)
+                            .concat(downvotedPost);
+    this.setState({
+      postList: editedPostList
+    });
   }
 
+  render() {
+    let currentlyVisibleState = null;
+    let buttonText = null;
 
-  // handleDownvotePost method goes here
+    if (this.state.editing) {
+      currentlyVisibleState = <EditPostForm
+                              post = {this.state.selectedPost}
+                              onEditPost = {this.handleEditingPostInList} />
+      buttonText = 'Return to Post List'
+    } else if {this.state.selectedPost !== null) {
+      currentlyVisibleState = <PostDetail
+                              post = {this.state.selectedPost}
+                              onClickingDelete = {this.handleDeletingPost}
+                              onClickingEdit = {this.handleEditClick}
+                              onClickingUpvote = {this.handleUpvotePost}
+                              onClickingDownvote = {this.handleDownvotePost} />
+      buttonText = 'Return to Post List'
+    } else if (this.state.formVisibleOnPage) {
+      currentlyVisibleOnPage = <NewPostForm
+                                onNewPostCreation = {this.handleAddingNewPostToList} />
+      buttonText = 'Return to Post List';
+    } else {
+      currentlyVisibleState = <PostList
+                              postList = {this.state.postList}
+                              onPostSelection = {this.handleChanginSelectedPost} />
+      buttonText = 'Add Post'
+    }
+    return(
+      <React.Fragment>
+        {currentlyVisibleState}
+        <button onClick={this.handleClick}>{buttonText}</button>
+      </React.Fragment>
+    );
+  }
 }
+
+export default PostControl;
