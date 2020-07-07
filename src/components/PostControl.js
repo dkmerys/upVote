@@ -13,11 +13,32 @@ class PostControl extends React.Component {
       editing: false,
       postList: [
         {
-          name: ,
-          message: ,
-          upVote:
-          downVote:
-
+          name: 'Pwnin Obrien',
+          message: '',
+          upVote: '',
+          downVote: '',
+          id: '0'
+        }
+        {
+          name: 'pwr2dapeephole',
+          message: '',
+          upVote: '',
+          downVote: '',
+          id: '1'
+        }
+        {
+          name: 'king_of_dairy_queen',
+          message: '',
+          upVote: '',
+          downVote: '',
+          id: '2'
+        }
+        {
+          name: 'Shaquille Oatmeal',
+          message: '',
+          upVote: '',
+          downVote: '',
+          id: '3'
         }
       ]
     }
