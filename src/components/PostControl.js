@@ -14,30 +14,30 @@ class PostControl extends React.Component {
       postList: [
         {
           name: 'Pwnin Obrien',
-          message: '',
-          upVote: '',
-          downVote: '',
+          message: 'Every time I try to eat healthy...along comes Christmas, Summer, Friday, or Tuesday and absolutely ruins it for me.',
+          upVote: 10,
+          downVote: 6,
           id: '0'
-        }
+        },
         {
           name: 'pwr2dapeephole',
-          message: '',
-          upVote: '',
-          downVote: '',
+          message: 'Today feels a lot more Tequila Tuesday than Taco Tuesday',
+          upVote: 3,
+          downVote: 17,
           id: '1'
-        }
+        },
         {
           name: 'king_of_dairy_queen',
-          message: '',
-          upVote: '',
-          downVote: '',
+          message: 'Some days I amaze myself. Other days, I look for my glasses while still wearing them.',
+          upVote: 73,
+          downVote: 24,
           id: '2'
-        }
+        },
         {
           name: 'Shaquille Oatmeal',
-          message: '',
-          upVote: '',
-          downVote: '',
+          message: 'If cauliflower can somehow become pizza, you my friend can do anything.',
+          upVote: 118,
+          downVote: 1,
           id: '3'
         }
       ]
@@ -123,7 +123,7 @@ class PostControl extends React.Component {
                               post = {this.state.selectedPost}
                               onEditPost = {this.handleEditingPostInList} />
       buttonText = 'Return to Post List'
-    } else if {this.state.selectedPost !== null) {
+    } else if (this.state.selectedPost !== null) {
       currentlyVisibleState = <PostDetail
                               post = {this.state.selectedPost}
                               onClickingDelete = {this.handleDeletingPost}

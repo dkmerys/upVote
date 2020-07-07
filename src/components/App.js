@@ -1,14 +1,13 @@
 import React from 'react';
 import Header from './Header';
-import VoteControl from './VoteControl';
-
+import PostControl from './PostControl';
 
 function App() {
   return (
     <React.Fragment>
       <Header />
-      <VoteControl />
-    <React.Fragment>
+      <PostControl />
+    </React.Fragment>
   );
 }
 
