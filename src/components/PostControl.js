@@ -3,6 +3,9 @@ import PostList from './PostList';
 import PostDetail from './PostDetail';
 import NewPostForm from './NewPostForm';
 import EditPostForm from './EditPostForm';
+import { connect } from 'react-redux';
+
+
 
 class PostControl extends React.Component {
   constructor(props) {
@@ -11,36 +14,6 @@ class PostControl extends React.Component {
       formVisibleOnPage: false,
       selectedPost: null,
       editing: false,
-      postList: [
-        {
-          name: 'Pwnin Obrien',
-          message: 'Every time I try to eat healthy...along comes Christmas, Summer, Friday, or Tuesday and absolutely ruins it for me.',
-          upVote: 10,
-          downVote: 6,
-          id: '0'
-        },
-        {
-          name: 'pwr2dapeephole',
-          message: 'Today feels a lot more Tequila Tuesday than Taco Tuesday',
-          upVote: 3,
-          downVote: 17,
-          id: '1'
-        },
-        {
-          name: 'king_of_dairy_queen',
-          message: 'Some days I amaze myself. Other days, I look for my glasses while still wearing them.',
-          upVote: 73,
-          downVote: 24,
-          id: '2'
-        },
-        {
-          name: 'Shaquille Oatmeal',
-          message: 'If cauliflower can somehow become pizza, you my friend can do anything.',
-          upVote: 118,
-          downVote: 1,
-          id: '3'
-        }
-      ]
     }
   }
 
@@ -59,9 +32,16 @@ class PostControl extends React.Component {
   }
 
   handleAddingNewPostToList = (newPost) => {
-    const newPostList = this.state.postList.concat(newPost);
-    this.setState({postList: newPostList,
-                  formVisibleOnPage: false})
+    const { dispatch } = this.props;
+    const { id, userName, message } = newPost;
+    const action = {
+      type: 'ADD_POST',
+      id: id,
+      userName: userName,
+      message: message,
+    }
+    dispatch(action);
+    this.setState({formVisibleOnPage: false});
   }
 
   handleChangingSelectedPost = (id) => {
@@ -150,4 +130,5 @@ class PostControl extends React.Component {
   }
 }
 
+PostControl = connect()(PostControl);
 export default PostControl;
