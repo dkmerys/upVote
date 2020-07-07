@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import Post from './Post';
 
 function PostDetail(props) {
-  const { post, onClickingDelete, onClickingUpvote, onClickingDownvote} = props;
+  const { post, onClickingDelete, onClickingDownvote, onClickingUpvote, onClickingEdit} = props;
   return (
     <React.Fragment>
       <h1>Post Details</h1>
       <h3>User Name: {post.userName}</h3>
       <h3>Message content: {post.message}</h3>
-      <button onClick={props.onClickingUpvote}>&#128077;</button>
+      <button onClick = {() => onClickingUpvote(post.id)}>&#128077;</button>
       <h3>{post.upVote}</h3>
-      <button onClick={props.onClickingDownvote}>&#x1f44e;</button> 
+      <button onClick = {() => onClickingDownvote(post.id)}>&#x1f44e;</button> 
       <h3> {post.downVote}</h3>
-      <button onClick={props.onClickingEdit}>Update post</button>
-      <button onClick={props.onClickingDelete}>Delete post</button>
+      <button onClick = {() => onClickingEdit(post.id)}>Update post</button>
+      <button onClick = {() => onClickingDelete(post.id)}>Delete post</button>
       <hr />
     </React.Fragment>
   );

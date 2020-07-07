@@ -83,22 +83,18 @@ class PostControl extends React.Component {
     });
   }
 
-  handleUpvotePost = (id, upVote) => {
+  handleUpvotePost = (id, userName, message, upVote, downVote) => {
     const { dispatch } = this.props;
     const action = {
       type: 'UPVOTE_POST',
       id: id,
-      upVote: upVote += 1
+      userName: userName,
+      message: message,
+      upVote: upVote,
+      downVote: downVote
     }
     dispatch(action);
     this.setState({selectedPost: null})
-    // upvotedPost.upVote += 1;
-    // const editedPostList = this.state.postList
-    //                         .filter(post => post.id !== this.state.selectedPost.id)
-    //                         .concat(upvotedPost);
-    // this.setState({
-    //   postList: editedPostList
-    // });
   }
 
   handleDownvotePost = (id) => {
@@ -154,7 +150,8 @@ PostControl.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    postList: state
+    postList: state.postList,
+    handleUpvotePost: state.handleUpvotePost
   }
 }
 
