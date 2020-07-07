@@ -44,5 +44,46 @@ class PostControl extends React.Component {
     this.setState({selectedPost: selectedPost});
   }
 
-  handle
+  handleDeletingPost = (id) => {
+    const newPostList = this.state.postList.filter(post => post.id !== id);
+    this.setState({
+      postList: newPostList,
+      selectedPost: null
+    });
+  }
+
+  handleEditClick = () => {
+    this.setState({editing: true});
+  }
+
+  handleEditingPostInList = (postToEdit) => {
+    const editedPostList = this.state.postList
+                            .filter(post => post.id !== this.state.selectedPost.id)
+                            .concat(postToEdit);
+    this.setState({
+      postList: editedPostList,
+      editing: false,
+      selectedPost: null
+    });
+  }
+
+  handleUpvotePost = (id) => {
+    const upvotedPost = this.state.postList.filter(post => post.id === id)[0];
+    upvotedPost.upVote += 1;
+    const editedPostList = this.state.postList
+                            .filter(post => post.id !== this.state.selectedPost.id)
+                            .concat(upvotedPost);
+    this.setState({
+      postList: editedPostList
+    });
+  }
+
+  handleDownvotePost = (id) => {
+    const downvotedPost = this.state.postList.filter(post => post.id === id)[0];
+    downvotedPost.downVote -= 1;
+    const editedPostList = this.state.postL
+  }
+
+
+  // handleDownvotePost method goes here
 }

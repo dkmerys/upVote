@@ -8,8 +8,8 @@ function Post(props) {
       <div onClick={() => props.whenPostClicked(props.id)}>
         <h3>{props.userName}</h3>
         <h3>{props.message}</h3>
-        <h3>{props.upVote}</h3>
-        <h3>{props.downVote}</h3>
+        <h3>(U+1F44D){props.upVote}</h3>
+        <h3>(U+1F44E){props.downVote}</h3>
       </div>
     </React.Fragment>
   );
