@@ -132,7 +132,7 @@ class PostControl extends React.Component {
                               onClickingDownvote = {this.handleDownvotePost} />
       buttonText = 'Return to Post List'
     } else if (this.state.formVisibleOnPage) {
-      currentlyVisibleOnPage = <NewPostForm
+      currentlyVisibleState = <NewPostForm
                                 onNewPostCreation = {this.handleAddingNewPostToList} />
       buttonText = 'Return to Post List';
     } else {
