@@ -11,21 +11,12 @@ function ReusableForm(props) {
           type='text'
           name='userName'
           placeholder='Please enter a user name.' />
+          <br />
         <input
           id='message'
           type='text'
           name='message'
           placeholder='Please enter your message here.' />
-        <input
-          id='upVote'
-          type='number'
-          min='0'
-          name='upVote' />
-        <input
-          id='downVote'
-          type='number'
-          min='0'
-          name='downVote' />
         <br />
         <button type='submit' >{props.buttonText}</button>
       </form>
