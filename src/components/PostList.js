@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 function PostList(props) {
   return (
     <React.Fragment>
-      {Object.values(props.postList).map((post) => {
+      {Object.values(props.postList).sort(function(a, b) {
+        return b.upVote - a.upVote;})
+     .map((post) => {
         return <Post
           whenPostClicked={props.onPostSelection}
           userName={post.userName}
@@ -14,7 +16,7 @@ function PostList(props) {
           downVote={post.downVote}
           id={post.id}
           key={post.id} />
-        })}
+      })}
     </React.Fragment>
   );
 }

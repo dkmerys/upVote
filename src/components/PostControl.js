@@ -158,8 +158,7 @@ PostControl.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    postList: state.postList,
-    handleUpvotePost: state.handleUpvotePost
+    postList: state.postList
   }
 }
 
