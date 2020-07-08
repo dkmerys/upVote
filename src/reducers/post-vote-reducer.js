@@ -11,6 +11,16 @@ export default (state = {}, action) => {
           downVote: downVote
         }
       });
+    case 'DOWNVOTE_POST':
+      return Object.assign({}, state, {
+        [id]: {
+          id: id,
+          userName: userName,
+          message: message,
+          upVote: upVote,
+          downVote: downVote - 1
+        }
+      });
     default:
       return state
   }

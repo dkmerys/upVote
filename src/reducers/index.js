@@ -1,10 +1,11 @@
-import postUpvoteReducer from './post-upvote-reducer';
+import postVoteReducer from './post-vote-reducer';
 import postListReducer from './post-list-reducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   postList: postListReducer,
-  handleUpvotePost: postUpvoteReducer
+  handleUpvotePost: postVoteReducer,
+  handleDownvotePost: postVoteReducer
 });
 
 export default rootReducer;

@@ -97,15 +97,18 @@ class PostControl extends React.Component {
     this.setState({selectedPost: null})
   }
 
-  handleDownvotePost = (id) => {
-    const downvotedPost = this.props.postList[id];
-    downvotedPost.downVote -= 1;
-    const editedPostList = this.state.postList
-                            .filter(post => post.id !== this.state.selectedPost.id)
-                            .concat(downvotedPost);
-    this.setState({
-      postList: editedPostList
-    });
+  handleDownvotePost = (id, userName, message, upVote, downVote) => {
+    const { dispatch } = this.props;
+    const action = {
+      type: 'DOWNVOTE_POST',
+      id: id,
+      userName: userName,
+      message: message,
+      upVote: upVote,
+      downVote: downVote
+    }
+    dispatch(action);
+    this.setState({selectedPost: null})
   }
 
   render() {

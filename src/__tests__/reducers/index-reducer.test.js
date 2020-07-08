@@ -1,6 +1,6 @@
 import rootReducer from '../../reducers/index';
 import { createStore } from 'redux';
-import postUpvoteReducer from '../../reducers/post-upvote-reducer';
+import postVoteReducer from '../../reducers/post-vote-reducer';
 import postListReducer from '../../reducers/post-list-reducer';
 
 let store = createStore(rootReducer);
@@ -9,7 +9,8 @@ describe('rootReducer', () => {
   test('Should return default state if no action type is recognized', () => {
     expect(rootReducer({}, { type: null })).toEqual({
       postList: {},
-      handleUpvotePost: {}
+      handleUpvotePost: {},
+      handleDownvotePost: {}
     });
   });
   
@@ -18,7 +19,7 @@ describe('rootReducer', () => {
   });
 
   test('Check that initial state of postUpvoteReducer matches root reducer', () => {
-    expect(store.getState().handleUpvotePost).toEqual(postUpvoteReducer(undefined, { type: null }));
+    expect(store.getState().handleUpvotePost).toEqual(postVoteReducer(undefined, { type: null }));
   });
 
   test('Check that initial state of postListReducer matches root reducer', () => {
@@ -34,7 +35,7 @@ describe('rootReducer', () => {
     expect(store.getState().postList).toEqual(postListReducer(undefined, action));
   });
 
-  test('Check that initial state of postUpvoteReducer matches root reducer', () => {
+  test('Check that initial state of postVoteReducer matches root reducer', () => {
     const action = {
       type: 'UPVOTE_POST',
       userName: 'Shaquille Oatmeal',
@@ -44,6 +45,6 @@ describe('rootReducer', () => {
       id: '3' 
     }
     store.dispatch(action)
-      expect(store.getState().handleUpvotePost).toEqual(postUpvoteReducer(undefined, action));
+      expect(store.getState().handleUpvotePost).toEqual(postVoteReducer(undefined, action));
   });
 });
