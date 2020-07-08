@@ -19,6 +19,8 @@ describe('postListReducer', () => {
     const postData = {
       userName: 'Shaquille Oatmeal',
       message: 'We all make mistakes.',
+      upVote: 3,
+      downVote: 0,
       id: 1
     };
 
@@ -55,6 +57,46 @@ describe('postListReducer', () => {
         userName: 'Charvarious Ward',
         message: 'Yep. Wednesday.',
         id: 2 
+      }
+    });
+  });
+  test('Should successfully increment a post upVote by 1', () => { 
+    const { id, userName, message, upVote, downVote } = postData;
+    action = {
+      type: 'UPVOTE_POST',
+      userName: userName,
+      message: message,
+      upVote: upVote,
+      downVote: downVote,
+      id: id,
+    };
+    expect(postListReducer({}, action)).toEqual({
+      [id] : {
+        userName: userName,
+        message: message,
+        upVote: 4,
+        downVote: downVote,
+        id: id
+      }
+    });
+  });
+  test('Should successfully decrement a post downVote by 1', () => { 
+    const { id, userName, message, upVote, downVote } = postData;
+    action = {
+      type: 'DOWNVOTE_POST',
+      userName: userName,
+      message: message,
+      upVote: upVote,
+      downVote: downVote,
+      id: id,
+    };
+    expect(postListReducer({}, action)).toEqual({
+      [id] : {
+        userName: userName,
+        message: message,
+        upVote: upVote,
+        downVote: -1,
+        id: id
       }
     });
   });

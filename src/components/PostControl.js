@@ -33,14 +33,15 @@ class PostControl extends React.Component {
 
   handleAddingNewPostToList = (newPost) => {
     const { dispatch } = this.props;
-    const { id, userName, message, upVote, downVote } = newPost;
+    const { id, userName, message, upVote, downVote, timeStamp } = newPost;
     const action = {
       type: 'ADD_POST',
       id: id,
       userName: userName,
       message: message,
       upVote: upVote,
-      downVote: downVote
+      downVote: downVote,
+      timeStamp
     }
     dispatch(action);
     this.setState({formVisibleOnPage: false});
@@ -83,8 +84,9 @@ class PostControl extends React.Component {
     });
   }
 
-  handleUpvotePost = (id, userName, message, upVote, downVote) => {
+  handleUpvotePost = (postToUpvote) => {
     const { dispatch } = this.props;
+    const { id, userName, message, upVote, downVote } = postToUpvote
     const action = {
       type: 'UPVOTE_POST',
       id: id,
@@ -94,11 +96,13 @@ class PostControl extends React.Component {
       downVote: downVote
     }
     dispatch(action);
-    this.setState({selectedPost: null})
+    this.setState({ selectedPost: null })
+    
   }
-
-  handleDownvotePost = (id, userName, message, upVote, downVote) => {
+  
+  handleDownvotePost = (postToDownvote) => {
     const { dispatch } = this.props;
+    const { id, userName, message, upVote, downVote } = postToDownvote
     const action = {
       type: 'DOWNVOTE_POST',
       id: id,
@@ -109,6 +113,7 @@ class PostControl extends React.Component {
     }
     dispatch(action);
     this.setState({selectedPost: null})
+    console.log(this.state.downVote)
   }
 
   render() {

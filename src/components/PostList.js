@@ -14,7 +14,7 @@ function PostList(props) {
           downVote={post.downVote}
           id={post.id}
           key={post.id} />
-      })}
+        })}
     </React.Fragment>
   );
 }
