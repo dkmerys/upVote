@@ -6,11 +6,13 @@ function Post(props) {
   return (
     <React.Fragment>
       <div onClick={() => props.whenPostClicked(props.id)}>
-        <h3>{props.userName}</h3>
-        <h3>{props.message}</h3>
-        <h3>{props.timeStamp}</h3>
-        <h3>&#128077; {props.upVote}</h3>
-        <h3>&#x1f44e; {props.downVote}</h3>
+        <div className='container'>
+          <h3 className='text'>{props.userName}</h3>
+          <h3 className='text'>{props.message}</h3>
+          <h3 className='text'>{props.timeStamp}</h3>
+          <h3 className='text'>&#128077; {props.upVote}</h3>
+          <h3 className='text'>&#x1f44e; {props.downVote}</h3>
+        </div>
       </div>
     </React.Fragment>
   );

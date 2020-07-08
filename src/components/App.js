@@ -5,7 +5,9 @@ import PostControl from './PostControl';
 function App() {
   return (
     <React.Fragment>
-      <Header />
+      <div className='header'>
+        <Header />
+        </div>
       <PostControl />
     </React.Fragment>
   );
