@@ -1,5 +1,5 @@
 import postListReducer from '../../reducers/post-list-reducer';
-
+import * as c from '../../actions/ActionTypes'
 
 
 describe('postListReducer', () => {
@@ -28,14 +28,14 @@ describe('postListReducer', () => {
     expect(postListReducer({}, { type: null })).toEqual({});
   });
   test('Should successfully add a new post to PostList', () => { 
-    const { userName, message, id, upVote, downVote } = postData;
+    const { userName, message, id, upVote, downVote, timeStamp } = postData;
     action = {
-      type: 'ADD_POST',
+      type: c.ADD_POST,
       userName: userName,
       message: message,
       id: id,
       upVote: upVote,
-      downVote: downVote
+      downVote: downVote,
     };
     expect(postListReducer({}, action)).toEqual({
       [id] : {
@@ -43,13 +43,14 @@ describe('postListReducer', () => {
         message: message,
         id: id,
         upVote: 0,
-        downVote: 0
+        downVote: 0,
+        timeStamp: Date(document.data)
       }
     });
   });
   test('Should successfully delete a post', () => {
     action = {
-      type: 'DELETE_POST',
+      type: c.DELETE_POST,
       id: 1 
     };
     expect(postListReducer(currentState, action)).toEqual({
@@ -63,7 +64,7 @@ describe('postListReducer', () => {
   test('Should successfully increment a post upVote by 1', () => { 
     const { id, userName, message, upVote, downVote } = postData;
     action = {
-      type: 'UPVOTE_POST',
+      type: c.UPVOTE_POST,
       userName: userName,
       message: message,
       upVote: upVote,
@@ -83,7 +84,7 @@ describe('postListReducer', () => {
   test('Should successfully decrement a post downVote by 1', () => { 
     const { id, userName, message, upVote, downVote } = postData;
     action = {
-      type: 'DOWNVOTE_POST',
+      type: c.DOWNVOTE_POST,
       userName: userName,
       message: message,
       upVote: upVote,
