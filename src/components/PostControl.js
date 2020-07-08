@@ -5,6 +5,7 @@ import NewPostForm from './NewPostForm';
 import EditPostForm from './EditPostForm';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as a from './../actions';
 
 
 class PostControl extends React.Component {
@@ -33,16 +34,7 @@ class PostControl extends React.Component {
 
   handleAddingNewPostToList = (newPost) => {
     const { dispatch } = this.props;
-    const { id, userName, message, upVote, downVote, timeStamp } = newPost;
-    const action = {
-      type: 'ADD_POST',
-      id: id,
-      userName: userName,
-      message: message,
-      upVote: upVote,
-      downVote: downVote,
-      timeStamp
-    }
+    const action = a.addPost(newPost);
     dispatch(action);
     this.setState({formVisibleOnPage: false});
   }
@@ -54,10 +46,7 @@ class PostControl extends React.Component {
 
   handleDeletingPost = (id) => {
     const { dispatch } = this.props;
-    const action = {
-      type: 'DELETE_POST',
-      id: id
-    }
+    const action = a.deletePost(id);
     dispatch(action);
     this.setState({selectedPost: null});
   }
@@ -68,15 +57,7 @@ class PostControl extends React.Component {
 
   handleEditingPostInList = (postToEdit) => {
     const { dispatch } = this.props;
-    const { id, userName, message, upVote, downVote} = postToEdit;
-    const action = {
-      type: 'ADD_POST',
-      id: id,
-      userName: userName,
-      message: message,
-      upVote: upVote,
-      downVote: downVote,
-    }
+    const action = a.addPost(postToEdit);
     dispatch(action);
     this.setState({
       editing: false,
@@ -86,31 +67,14 @@ class PostControl extends React.Component {
 
   handleUpvotePost = (postToUpvote) => {
     const { dispatch } = this.props;
-    const { id, userName, message, upVote, downVote } = postToUpvote
-    const action = {
-      type: 'UPVOTE_POST',
-      id: id,
-      userName: userName,
-      message: message,
-      upVote: upVote,
-      downVote: downVote
-    }
+    const action = a.upvotePost(postToUpvote);
     dispatch(action);
-    this.setState({ selectedPost: null })
-    
+    this.setState({ selectedPost: null })    
   }
   
   handleDownvotePost = (postToDownvote) => {
     const { dispatch } = this.props;
-    const { id, userName, message, upVote, downVote } = postToDownvote
-    const action = {
-      type: 'DOWNVOTE_POST',
-      id: id,
-      userName: userName,
-      message: message,
-      upVote: upVote,
-      downVote: downVote
-    }
+    const action = a.downvotePost(postToDownvote)
     dispatch(action);
     this.setState({selectedPost: null})
     console.log(this.state.downVote)
