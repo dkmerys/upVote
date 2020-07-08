@@ -39,8 +39,8 @@ class PostControl extends React.Component {
       id: id,
       userName: userName,
       message: message,
-      upVote: 0,
-      downVote: 0
+      upVote: upVote,
+      downVote: downVote
     }
     dispatch(action);
     this.setState({formVisibleOnPage: false});

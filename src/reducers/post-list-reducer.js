@@ -7,6 +7,8 @@ export default (state = {}, action) => {
           userName: userName,
           message: message,
           id: id,
+          upVote: 0,
+          downVote: 0
         }
       });
     case 'DELETE_POST':

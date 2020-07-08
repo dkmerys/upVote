@@ -26,18 +26,22 @@ describe('postListReducer', () => {
     expect(postListReducer({}, { type: null })).toEqual({});
   });
   test('Should successfully add a new post to PostList', () => { 
-    const { userName, message, id } = postData;
+    const { userName, message, id, upVote, downVote } = postData;
     action = {
       type: 'ADD_POST',
       userName: userName,
       message: message,
-      id: id
+      id: id,
+      upVote: upVote,
+      downVote: downVote
     };
     expect(postListReducer({}, action)).toEqual({
       [id] : {
         userName: userName,
         message: message,
         id: id,
+        upVote: 0,
+        downVote: 0
       }
     });
   });
